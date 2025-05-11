@@ -5,12 +5,15 @@
              xmlns:converters="clr-namespace:SubScreenDisplay.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary x:Key="Dictionary">
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <local:PlayStatusConverter x:Key="PlayStatusConverter" />
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>

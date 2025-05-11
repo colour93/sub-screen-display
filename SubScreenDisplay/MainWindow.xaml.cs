@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using SubScreenDisplay.API;
+using SubScreenDisplay.ViewModels;
 
 namespace SubScreenDisplay;
 
@@ -14,6 +15,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        DataContext = new PlayerViewModel();
         Loaded();
     }
 

@@ -1,13 +1,24 @@
 ﻿<Window x:Class="SubScreenDisplay.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SubScreenDisplay"
-        xmlns:controls="clr-namespace:SubScreenDisplay.Player"
-        mc:Ignorable="d"
-        Title="音乐播放器" Height="480" Width="1180"
-        Background="#1A1A1A">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:SubScreenDisplay"
+    xmlns:controls="clr-namespace:SubScreenDisplay.Player"
+    xmlns:viewModels="clr-namespace:SubScreenDisplay.ViewModels"
+    mc:Ignorable="d"
+    Title="Sub Screen Display" Height="480" Width="1180"
+    Background="#1A1A1A">
+
+    <Window.DataContext>
+        <viewModels:PlayerViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <local:PlayStatusConverter x:Key="PlayStatusConverter" />
+        <!-- <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" /> -->
+        <!-- <local:ProgressPercentageConverter x:Key="ProgressPercentageConverter" /> -->
+    </Window.Resources>
 
     <Grid Margin="24">
         <Grid.ColumnDefinitions>
@@ -32,35 +43,44 @@
 
             <!-- 专辑封面 -->
             <Border Width="280" Height="280"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    CornerRadius="8" BorderThickness="0">
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                CornerRadius="8" BorderThickness="0">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="5" Direction="270"
-                                      Color="Black" Opacity="0.6" BlurRadius="10" />
+                        Color="Black" Opacity="0.6" BlurRadius="10" />
                 </Border.Effect>
                 <Border.Background>
-                    <ImageBrush Stretch="UniformToFill" ImageSource="pack://application:,,,/Assets/无条件.jpg" />
+                    <ImageBrush Stretch="UniformToFill"
+                        ImageSource="pack://application:,,,/Assets/无条件.jpg" />
                 </Border.Background>
             </Border>
 
-            <!-- 进度条 -->
             <StackPanel>
-
-                <Slider Margin="0, 20, 0, 0" Value="30" Maximum="100" />
-                <Grid Margin="5, 0">
-                    <TextBlock FontFamily="Segoe UI Variable" FontWeight="Regular" FontSize="12" Text="01:20" Foreground="White" HorizontalAlignment="Left" />
-                    <TextBlock FontFamily="Segoe UI Variable" FontWeight="Regular" FontSize="12" Text="03:48" Foreground="White" HorizontalAlignment="Right" />
-                </Grid>
+                <!-- <Slider Margin="0, 20, 0, 0"  -->
+                <!--        Value="{Binding CurrentPosition, Mode=TwoWay}"  -->
+                <!--        Maximum="{Binding TotalDuration.TotalSeconds}" /> -->
+                <!-- <Grid Margin="5, 0"> -->
+                <!--     <TextBlock FontFamily="Segoe UI Variable" FontWeight="Regular" FontSize="12" -->
+                <!--         Text="{Binding CurrentPosition, Converter={StaticResource TimeSpanToStringConverter}}"  -->
+                <!--         Foreground="White" HorizontalAlignment="Left" /> -->
+                <!--     <TextBlock FontFamily="Segoe UI Variable" FontWeight="Regular" FontSize="12" -->
+                <!--         Text="{Binding TotalDuration, Converter={StaticResource TimeSpanToStringConverter}}"  -->
+                <!--         Foreground="White" HorizontalAlignment="Right" /> -->
+                <!-- </Grid> -->
 
                 <!-- 播放控制按钮 -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                    <Button Content="" FontSize="16" Width="40" Height="40" FontFamily="Segoe Fluent Icons"
-                            Background="Transparent" Foreground="White" BorderThickness="0" />
-                    <Button Content="" FontSize="16" Width="40" Height="40" FontFamily="Segoe Fluent Icons"
-                            Background="Transparent" Foreground="White" BorderThickness="0" />
-                    <Button Content="" FontSize="16" Width="40" Height="40" FontFamily="Segoe Fluent Icons"
-                            Background="Transparent" Foreground="White" BorderThickness="0" />
+                    VerticalAlignment="Center">
+                    <Button Content="&#xE892;" FontSize="16" Width="40" Height="40"
+                        FontFamily="Segoe Fluent Icons" Command="{Binding PreviousCommand}"
+                        Background="Transparent" Foreground="White" BorderThickness="0" />
+                    <Button Content="{Binding IsPlaying, Converter={StaticResource PlayStatusConverter}}" 
+                        FontSize="16" Width="40" Height="40"
+                        FontFamily="Segoe Fluent Icons" Command="{Binding PlayPauseCommand}"
+                        Background="Transparent" Foreground="White" BorderThickness="0" />
+                    <Button Content="&#xE893;" FontSize="16" Width="40" Height="40"
+                        FontFamily="Segoe Fluent Icons" Command="{Binding NextCommand}"
+                        Background="Transparent" Foreground="White" BorderThickness="0" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
@@ -69,24 +89,22 @@
         <Grid Grid.Column="2">
             <!-- 歌曲信息 -->
             <StackPanel VerticalAlignment="Bottom">
-                <TextBlock Foreground="White" HorizontalAlignment="Right" FontFamily="Source Han Sans SC"
-                           FontWeight="Heavy" FontSize="40">
-                    无条件
-                </TextBlock>
-                <TextBlock Foreground="White" HorizontalAlignment="Right" FontFamily="Source Han Sans SC"
-                           FontWeight="Regular" FontSize="24">
-                    陈奕迅
-                </TextBlock>
+                <TextBlock Foreground="White" HorizontalAlignment="Right"
+                    FontFamily="Source Han Sans SC"
+                    FontWeight="Heavy" FontSize="40" Text="{Binding CurrentSong.Title}" />
+                <TextBlock Foreground="White" HorizontalAlignment="Right"
+                    FontFamily="Source Han Sans SC"
+                    FontWeight="Regular" FontSize="24" Text="{Binding CurrentSong.Artist}" />
             </StackPanel>
         </Grid>
 
         <!-- 状态文本（隐藏但保留功能） -->
         <TextBlock x:Name="StatusText"
-                   Visibility="Collapsed" Text="状态信息" />
+            Visibility="Collapsed" Text="状态信息" />
 
         <!-- 保留原有按钮但隐藏 -->
         <Button x:Name="OpenDataBindingWindow"
-                Content="打开数据绑定窗口" Click="OpenDataBindingWindow_Click"
-                Visibility="Collapsed" />
+            Content="打开数据绑定窗口" Click="OpenDataBindingWindow_Click"
+            Visibility="Collapsed" />
     </Grid>
 </Window>
