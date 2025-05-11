@@ -1,0 +1,15 @@
+<UserControl x:Class="SubScreenDisplay.Player.LyricItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SubScreenDisplay.Player"
+             mc:Ignorable="d" 
+             Margin="0,0,0,18">
+    <StackPanel>
+        <TextBlock x:Name="MainText" Text="当潮流爱新鲜" FontFamily="Source Han Sans SC" FontWeight="Light"
+                   Foreground="White" FontSize="24" Margin="0"/>
+        <TextBlock x:Name="SubText" Text="dong ciu lao oi san sin" FontFamily="Source Han Sans SC" FontWeight="Light"
+                   Foreground="White" FontSize="12" Margin="0"/>
+    </StackPanel>
+</UserControl>

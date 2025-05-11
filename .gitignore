@@ -1,0 +1,97 @@
+﻿# Rider 特定文件和文件夹
+.idea/
+*.sln.iml
+.idea_modules/
+*.suo
+*.user
+.idea/.idea.*/.idea/workspace.xml
+.idea/.idea.*/.idea/tasks.xml
+.idea/.idea.*/.idea/usage.statistics.xml
+.idea/.idea.*/.idea/shelf/
+.idea/.idea.*/.idea/contentModel.xml
+.idea/.idea.*/.idea/modules.xml
+.idea/.idea.*/.idea/projectSettingsUpdater.xml
+.idea/.idea.*/.idea/dataSources/
+.idea/.idea.*/.idea/dataSources.ids
+.idea/.idea.*/.idea/dataSources.local.xml
+.idea/.idea.*/.idea/sqlDataSources.xml
+.idea/.idea.*/.idea/dynamic.xml
+
+# .NET 构建输出
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 文件
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+
+# NuGet 包
+*.nupkg
+# NuGet Symbol 包
+*.snupkg
+# NuGet 包文件夹
+**/[Pp]ackages/*
+# 除了 build/ 文件夹下的
+!**/[Pp]ackages/build/
+# 如果使用 NuGet 包还原，则取消注释
+#!**/[Pp]ackages/repositories.config
+# NuGet v3 项目.json 文件会生成更多的文件
+*.nuget.props
+*.nuget.targets
+
+# 测试结果
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# 其他常见忽略文件
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
